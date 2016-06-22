@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Payment type</th>
+      <th>Transaction status</th>
+      <th>Fraud status</th>
+      <th>Gross amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pays.each do |pay| %>
+      <tr>
+        <td><%= pay.order_id %></td>
+        <td><%= pay.payment_type %></td>
+        <td><%= pay.transaction_status %></td>
+        <td><%= pay.fraud_status %></td>
+        <td><%= pay.gross_amount %></td>
+        <td><%= link_to 'Show', pay %></td>
+        <td><%= link_to 'Edit', edit_pay_path(pay) %></td>
+        <td><%= link_to 'Destroy', pay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pay', new_pay_path %>

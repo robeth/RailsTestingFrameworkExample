@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @pay.order_id %>
+</p>
+
+<p>
+  <strong>Payment type:</strong>
+  <%= @pay.payment_type %>
+</p>
+
+<p>
+  <strong>Transaction status:</strong>
+  <%= @pay.transaction_status %>
+</p>
+
+<p>
+  <strong>Fraud status:</strong>
+  <%= @pay.fraud_status %>
+</p>
+
+<p>
+  <strong>Gross amount:</strong>
+  <%= @pay.gross_amount %>
+</p>
+
+<%= link_to 'Edit', edit_pay_path(@pay) %> |
+<%= link_to 'Back', pays_path %>

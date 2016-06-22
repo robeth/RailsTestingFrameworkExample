@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_id: MyString
+  item1: MyString
+  item2: MyString
+  vtweblink: MyString
+
+two:
+  order_id: MyString2
+  item1: MyString2
+  item2: MyString2
+  vtweblink: MyString2

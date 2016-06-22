@@ -1,0 +1,38 @@
+<h1>Detail Pembayaran</h1>
+
+<table style='width:90%' >
+	<tr>
+		<td><strong>Order ID</strong></td>
+		<td><strong>Tipe Pembayaran</strong></td>
+		<td><strong>Status Transaksi</strong></td>
+		<td><strong>Fraud Status</strong></td>
+		<td><strong>Nilai Transaksi</strong></td>
+		<td><strong>Keterangan</strong></td>
+	</tr>
+
+	<% 
+		@pays = Pay.all
+		@pays.each do |a|
+			@order_id  			= a.order_id
+			@payment_type 		= a.payment_type
+			@transaction_status	= a.transaction_status
+			@fraud_status 	   	= a.fraud_status
+			@gross_amount		= a.gross_amount
+			@status_pembayaran  = 'Sudah Membayar'
+
+			if @transaction_status == 'pending' then
+				@status_pembayaran = 'Belum Membayar'
+			end
+	%>
+
+	<tr>
+		<td><%= @order_id %></td>
+		<td><%= @payment_type %></td>
+		<td><%= @transaction_status %></td>
+		<td><%= @fraud_status %></td>
+		<td><%= @gross_amount %></td>
+		<td><%= @status_pembayaran %></td>
+	</tr>
+
+	<% end %>
+</table>

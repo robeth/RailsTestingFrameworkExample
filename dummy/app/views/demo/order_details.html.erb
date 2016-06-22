@@ -1,0 +1,28 @@
+<h1>Detail Order</h1>
+
+<table style='width:80%' >
+	<tr>
+		<td><strong>Order ID</strong></td>
+		<td><strong>Link transaksi</strong></td>
+		<td><strong>Beruang yang Dibeli</strong></td>
+		<td><strong>bukan Beruang yang Dibeli</strong></td>
+	</tr>
+
+	<% 
+		@orders = Order.all
+		@orders.each do |a|
+			@order_id  = a.order_id
+			@vtweblink = a.vtweblink
+			@item1	   = a.item1
+			@item2 	   = a.item2
+	%>
+
+	<tr>
+		<td><%= @order_id %></td>
+		<td><%= @vtweblink %></td>
+		<td><%= @item1 %></td>
+		<td><%= @item2 %></td>
+	</tr>
+
+	<% end %>
+</table>

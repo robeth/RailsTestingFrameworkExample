@@ -1,0 +1,36 @@
+<h1>Daftar Transaksi</h1>
+
+<table style='width:95%'>
+<tr>
+	<td><strong>Order ID</strong></td>
+	<td><strong>Metode Pembayaran</strong></td>
+	<td><strong>Beruang yang Dibeli</strong></td>
+	<td><strong>bukan Beruang yang Dibeli</strong></td>
+	<td><strong>Transaction Status</strong></td>
+	<td><strong>Fraud Status</strong></td>
+	<td><strong>Nilai Transaksi</strong></td>
+	<td><strong>Status Pembayaran</strong></td>
+	<td><strong>Link Transaksi</strong></td>
+</tr>
+<%
+	@pay = Pay.all
+	@pay.each do |a|
+		@ord = Order.where( order_id: a.order_id ).first
+		@payment_status = "Sudah Membayar"
+		if a.transaction_status == 'pending'
+			@payment_status = "Belum Membayar"
+		end  
+%>
+	<tr>
+		<td><%= a.order_id %></td>
+		<td><%= a.payment_type %></td>
+		<td><%= @ord.item1 %></td>
+		<td><%= @ord.item2 %></td>
+		<td><%= a.transaction_status %></td>
+		<td><%= a.fraud_status %></td>
+		<td><%= a.gross_amount %></td>
+		<td><%= @payment_status %></td>
+		<td><%= @ord.vtweblink %></td>
+	</tr>
+	<%end%>
+</table>
