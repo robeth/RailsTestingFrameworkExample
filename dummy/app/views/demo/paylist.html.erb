@@ -1,6 +1,6 @@
 <h1>Daftar Transaksi</h1>
 
-<table style='width:95%'>
+<table style='width:100%'>
 <tr>
 	<td><strong>Order ID</strong></td>
 	<td><strong>Metode Pembayaran</strong></td>
@@ -19,18 +19,20 @@
 		@payment_status = "Sudah Membayar"
 		if a.transaction_status == 'pending'
 			@payment_status = "Belum Membayar"
-		end  
+		elsif a.transaction_status == 'expire'
+			@payment_status = 'Transaksi Gagal'	
+		end		
 %>
-	<tr>
-		<td><%= a.order_id %></td>
-		<td><%= a.payment_type %></td>
-		<td><%= @ord.item1 %></td>
-		<td><%= @ord.item2 %></td>
-		<td><%= a.transaction_status %></td>
-		<td><%= a.fraud_status %></td>
-		<td><%= a.gross_amount %></td>
-		<td><%= @payment_status %></td>
-		<td><%= @ord.vtweblink %></td>
-	</tr>
+		<tr>
+			<td><%= a.order_id %></td>
+			<td><%= a.payment_type %></td>
+			<td><%= @ord.item1 %></td>
+			<td><%= @ord.item2 %></td>
+			<td><%= a.transaction_status %></td>
+			<td><%= a.fraud_status %></td>
+			<td><%= a.gross_amount %></td>
+			<td><%= @payment_status %></td>
+			<td><%= @ord.vtweblink %></td>
+		</tr>
 	<%end%>
 </table>

@@ -1,25 +1,60 @@
-<h2>Silahkan Pilih barang-barang yang diinginkan</h2>
+<div id='main' class='wrapper'>	
+	<%
+		@beruang1 = "http://1.bp.blogspot.com/-KWl8GFC2dqA/VWWO1TQCmrI/AAAAAAAAIuI/HIkAfNrsIWo/s1600/Boneka%2Bberuang%2Blove%2B23.jpg"
+		@beruang2 = "https://s1.bukalapak.com/img/174202321/medium/Boneka-Monyet-Coklat-Tan-Ukuran-Sedang-Kualitas-Export-Imut-_-Lucu.jpg"
 
-<%
-	@beruang1 = "http://1.bp.blogspot.com/-KWl8GFC2dqA/VWWO1TQCmrI/AAAAAAAAIuI/HIkAfNrsIWo/s1600/Boneka%2Bberuang%2Blove%2B23.jpg"
-	@beruang2 = "https://s1.bukalapak.com/img/174202321/medium/Boneka-Monyet-Coklat-Tan-Ukuran-Sedang-Kualitas-Export-Imut-_-Lucu.jpg"
+	%>
 
-%>
+	<section id="two" class="wrapper style2 special" style='background-color:#999'>
+			<h1>SELAMAT DATANG</h1>
+			<h4>Silahkan Pilih barang-barang yang diinginkan</h4>
+	</section>	
 
-<h3>Beruang</h3>
-<%= image_tag(@beruang1, size: "100x100")  %><br>
-<h4>Rp.2000</h4>
-<h1><b><%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i + 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B+') %></b></h1>
-<h1><b><%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i - 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B-') %></b></h1>
+	<section id="two" class="wrapper style2 special">
+		<div class='container' style="display:inline-table">
 
-<h3>bukan Beruang</h3>
-<%= image_tag(@beruang2, size: "100x100") %><br>
-<h4>Rp.3000</h4>
-<h1><b><%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i + 1}, :id => 'b+') %></b></h1>
-<h1><b><%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i - 1}, :id => 'b-') %></b></h1>
+			<div class="6u 12u$(xsmall)">
+				<h3>Beruang</h3>
+				<%= image_tag(@beruang1, size: "100x100")  %><br>
+				<h4>Rp.2000</h4>
+				<ul style="list-style-type:none">
+					<li><h4><b>
+						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i + 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B+', :class => "button small special") %>
+					</b></h4></li>
+					<li><h4><b>
+						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i - 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B-', :class => "button small") %>
+					</b></h4></li>
+				</ul>
+			</div>		
 
-<h3> Barang-barang yang dibeli </h3>
-<h4> Jumlah Beruang yang dibeli       : <%= @jumlahBeruang1 %></h4>
-<h4> Jumlah bukan Beruang yang dibeli : <%= @jumlahBeruang2 %></h4>
+			<div class="6u 12u$(xsmall)">
+				<h3>bukan Beruang</h3>
+				<%= image_tag(@beruang2, size: "100x100") %><br>
+				<h4>Rp.3000</h4>
+				<ul style="list-style-type:none">
+					<li><h4><b>
+						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i + 1}, :id => 'b+', :class => "button small special") %>
+					</b></h4></li>
+					<li><h4><b>
+						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i - 1}, :id => 'b-', :class => "button small") %>
+					</b></h4></li>
+				</ul>
+			</div>
+		</div>
+	</section>
 
-<h1><b><%= link_to("Bayar", {:action => 'pay_transaction', :jumlahBeruang1 => @jumlahBeruang1, :jumlahBeruang2 => @jumlahBeruang2} ) %></b></h1>
+	<section id="two" class="wrapper style2 special" style='background-color:#999'>
+
+		<header>
+			<h3> Barang-barang yang dibeli </h3>
+		</header>	
+
+			<h4> Jumlah Beruang yang dibeli       : <%= @jumlahBeruang1 %></h4>
+			<h4> Jumlah bukan Beruang yang dibeli : <%= @jumlahBeruang2 %></h4>
+
+			<br><br>
+
+		<h1><b><%= link_to("Bayar", {:action => 'pay_transaction', :jumlahBeruang1 => @jumlahBeruang1, :jumlahBeruang2 => @jumlahBeruang2}, :class => 'button large special' ) %></b></h1>
+
+	</section>	
+</div>

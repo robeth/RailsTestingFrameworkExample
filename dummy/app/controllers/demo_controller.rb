@@ -1,5 +1,7 @@
 class DemoController < ApplicationController
 
+  layout 'standard'
+
   def new
   end
 
@@ -7,8 +9,8 @@ class DemoController < ApplicationController
   end
 
   def initial_store
-  	@jumlahBeruang1 = params['item1']
-  	@jumlahBeruang2 = params['item2']
+  	@jumlahBeruang1 = 0
+  	@jumlahBeruang2 = 0
   	render('demo/store')
   end
 

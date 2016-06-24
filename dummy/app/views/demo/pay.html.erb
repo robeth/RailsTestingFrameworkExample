@@ -1,47 +1,45 @@
-<h1>Status Pembayaran </h1>
+<section id="two" class="wrapper style2 special">
+	<br>
+	<h1>Status Pembayaran </h1>
+	<br>
+		<%
+			@pays = Pay.where( order_id: @order_id).first
+			@ord  = Order.where( order_id: @order_id).first
 
-	<%
-		@pays = Pay.where( order_id: @order_id).first
-		@ord  = Order.where( order_id: @order_id).first
+			if @ord != nil
 
-		if @ord != nil
-
-			@item1 = @ord.item1.to_i
-			@item2 = @ord.item2.to_i
+				@item1 = @ord.item1.to_i
+				@item2 = @ord.item2.to_i
 
 
-			if @pays != nil
-				@payment_type = @pays.payment_type
-				@fraud_status = @pays.fraud_status
-				@gross_amount = @pays.gross_amount
-	
-	%>
+				if @pays != nil
+					@payment_type = @pays.payment_type
+					@fraud_status = @pays.fraud_status
+					@gross_amount = @pays.gross_amount
+		
+		%>
 
-				<h4> Order ID : <%= @order_id %> </h4>
-				<h4> Metode Pembayaran : <%= @payment_type %> </h4>
-				<h4> Status Transaksi  : <%= @transaction_status %> </h4>
-				<h4> Status Pembayaran : <%= @fraud_status %> </h4>
-				<h4> Amount : <%= @gross_amount %> </h4>
-				<h4> Barang - barang yang dibeli : </h4><br>
+					<h4> Order ID : <%= @order_id %> </h4>
+					<h4> Metode Pembayaran : <%= @payment_type %> </h4>
+					<h4> Status Transaksi  : <%= @transaction_status %> </h4>
+					<h4> Status Pembayaran : <%= @fraud_status %> </h4>
+					<h4> Amount : <%= @gross_amount %> </h4>
+					<h4> Barang - barang yang dibeli : </h4><br>
 
-				<h5> <%= @item1 %> buah Boneka Beruang </h5>
-				<h5> <%= @item2 %> buah bukan Boneka Beruang </h5><br><br>
+					<h5> <%= @item1 %> buah Boneka Beruang </h5>
+					<h5> <%= @item2 %> buah bukan Boneka Beruang </h5><br><br>
 
-			<%else%>
+				<%else%>
 
-				<h4> Order ID : <%= @order_id %> </h4>
-				<h4> Status Transaksi  : <%= @transaction_status %> </h4>
-				<h4> Barang - barang yang dibeli : </h4>
+					<h4> Order ID : <%= @order_id %> </h4>
+					<h4> Status Transaksi  : <%= @transaction_status %> </h4>
+					<h4> Barang - barang yang dibeli : </h4>
 
-				<h5> <%= @item1 %> buah Boneka Beruang </h5>
-				<h5> <%= @item2 %> buah bukan Boneka Beruang </h5>
+					<h5> <%= @item1 %> buah Boneka Beruang </h5>
+					<h5> <%= @item2 %> buah bukan Boneka Beruang </h5>
 
-			<%end%>
-			
-		<%end%>
+				<%end%>
+				
+			<%end%><br><br><br><br><br><br><br><br><br>
 
-<h2><%= link_to("Lihat Daftar Transaksi", {:controller => 'demo', :action => 'paylist' }) %></h2>
-
-<h2><%= link_to("Lihat Detil Pembayaran", {:controller => 'demo', :action => 'pay_details' } ) %></h2>
-
-<h2><%= link_to("Lihat Detil Order", {:controller => 'demo', :action => 'order_details' } ) %></h2>
+</section>

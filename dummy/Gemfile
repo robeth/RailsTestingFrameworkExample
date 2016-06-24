@@ -51,6 +51,7 @@ group :development, :test do
   gem 'faker'
   gem 'byebug'
   gem 'cucumber'
+  gem 'recursive-open-struct'
 end
 
 group :development do

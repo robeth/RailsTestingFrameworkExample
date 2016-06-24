@@ -2,9 +2,10 @@ class RequestController < ApplicationController
 	skip_before_filter :verify_authenticity_token, only: [:receive_webhook]
 
 	def receive_webhook
+		render :nothing => true
+
     	post_body = request.body.read
     	callback_params = Veritrans.decode_notification_json(post_body)
-
 	    verified_data = Veritrans.status(callback_params['transaction_id'])
 
 	    if verified_data.status_code != 404

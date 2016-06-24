@@ -1,6 +1,6 @@
 <h1>Detail Pembayaran</h1>
 
-<table style='width:90%' >
+<table style='width:100%' >
 	<tr>
 		<td><strong>Order ID</strong></td>
 		<td><strong>Tipe Pembayaran</strong></td>
@@ -22,6 +22,8 @@
 
 			if @transaction_status == 'pending' then
 				@status_pembayaran = 'Belum Membayar'
+			elsif @transaction_status == 'expire'
+				@status_pembayaran = 'Transaksi Gagal'	
 			end
 	%>
 
