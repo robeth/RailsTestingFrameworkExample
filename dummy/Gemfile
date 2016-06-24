@@ -42,6 +42,9 @@ gem 'factory_girl_rails', '4.2.1'
 # use capybara for integrated testing
 gem 'capybara'
 
+# web driver used for integrated testing
+gem 'selenium-webdriver'
+
 # use veritrans for payment
 gem 'veritrans'
 
@@ -52,6 +55,7 @@ group :development, :test do
   gem 'byebug'
   gem 'cucumber'
   gem 'recursive-open-struct'
+  gem 'capybara-screenshot'
 end
 
 group :development do

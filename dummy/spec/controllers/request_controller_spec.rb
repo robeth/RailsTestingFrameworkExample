@@ -20,16 +20,16 @@ RSpec.describe RequestController, :type => :controller do
 			)
 		}
 		let(:veritrans_status) { 
-	      {  
-	        status_code: 200, 
-	        data: {
-	          order_id: Faker::Number.number(16),
-	          payment_type: "bank_transfer",
-	          transaction_status: "settlement",
-	          fraud_status: "accept",
-	          gross_amount: Faker::Number.number(4)
-	        }
-	      } 
+		    {  
+		        status_code: 200, 
+		        data: {
+		          order_id: Faker::Number.number(16),
+		          payment_type: "bank_transfer",
+		          transaction_status: "settlement",
+		          fraud_status: "accept",
+		          gross_amount: Faker::Number.number(4)
+		        }
+	      	} 
 	    }
 
 		before :each do
@@ -46,6 +46,21 @@ RSpec.describe RequestController, :type => :controller do
     		  it "should update the database" do
     			expect(Pay).to receive(:where)
     			post :receive_webhook, @string.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+
+    			expect(assigns(:obj)).to_not eq nil
+    			expect(assigns(:object)).to_not eq nil
+
+    			expect(assigns(:object).order_id).to_not eq nil
+    			expect(assigns(:object).payment_type).to_not eq nil
+    			expect(assigns(:object).transaction_status).to_not eq nil
+    			expect(assigns(:object).fraud_status).to_not eq nil
+    			expect(assigns(:object).gross_amount).to_not eq nil
+
+    			expect(assigns(:object).order_id).to be_a_kind_of String
+    			expect(assigns(:object).payment_type).to be_a_kind_of String
+    			expect(assigns(:object).transaction_status).to be_a_kind_of String
+    			expect(assigns(:object).fraud_status).to be_a_kind_of String
+    			expect(assigns(:object).gross_amount).to be_a_kind_of Integer
     		  end
 
   		   	end
