@@ -928,7 +928,7 @@
 		height: 4.5em;
 		left: 0;
 		line-height: 4.4em;
-		position: fixed;
+		position: absolute;
 		text-transform: uppercase;
 		top: 0;
 		width: 100%;
@@ -1054,7 +1054,7 @@
 	#banner {
 		padding: 16em 0 13em 0;
 		background-attachment: fixed;
-		background-image: url("images/overlay.png"), url("assets/images/banner.jpg");
+		background-image: url("images/beruang.jpg");
 		background-position: center top;
 		background-size: cover;
 		line-height: 1.75;
@@ -1102,7 +1102,7 @@
 
 		.wrapper.style3 {
 			background-attachment: fixed;
-			background-image: url("images/overlay.png"), url("../images/banner.jpg");
+			background-image: url("images/beruang.jpg");
 			background-position: center center;
 			background-size: cover;
 		}

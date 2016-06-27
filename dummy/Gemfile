@@ -55,7 +55,9 @@ group :development, :test do
   gem 'byebug'
   gem 'cucumber'
   gem 'recursive-open-struct'
+  gem 'capybara-webkit'
   gem 'capybara-screenshot'
+  gem 'poltergeist'
 end
 
 group :development do

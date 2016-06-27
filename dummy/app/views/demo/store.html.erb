@@ -5,7 +5,7 @@
 
 	%>
 
-	<section id="two" class="wrapper style2 special" style='background-color:#999'>
+	<section id="one" class="wrapper style2 special" style='background-color:#999'>
 			<h1>SELAMAT DATANG</h1>
 			<h4>Silahkan Pilih barang-barang yang diinginkan</h4>
 	</section>	
@@ -17,12 +17,12 @@
 				<h3>Beruang</h3>
 				<%= image_tag(@beruang1, size: "100x100")  %><br>
 				<h4>Rp.2000</h4>
-				<ul style="list-style-type:none">
+				<ul id="beruang1" style="list-style-type:none">
 					<li><h4><b>
-						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i + 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B+', :class => "button small special") %>
+						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i + 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'Bplus', :class => "button small special") %>
 					</b></h4></li>
 					<li><h4><b>
-						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i - 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'B-', :class => "button small") %>
+						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i - 1, :jumlahBeruang2 => @jumlahBeruang2}, :id => 'Bmin', :class => "button small") %>
 					</b></h4></li>
 				</ul>
 			</div>		
@@ -33,17 +33,17 @@
 				<h4>Rp.3000</h4>
 				<ul style="list-style-type:none">
 					<li><h4><b>
-						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i + 1}, :id => 'b+', :class => "button small special") %>
+						<%= link_to("+", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i + 1}, :id => 'bplus', :class => "button small special") %>
 					</b></h4></li>
 					<li><h4><b>
-						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i - 1}, :id => 'b-', :class => "button small") %>
+						<%= link_to("-", {:action => 'store', :jumlahBeruang1 => @jumlahBeruang1.to_i, :jumlahBeruang2 => @jumlahBeruang2.to_i - 1}, :id => 'bmin', :class => "button small") %>
 					</b></h4></li>
 				</ul>
 			</div>
 		</div>
 	</section>
 
-	<section id="two" class="wrapper style2 special" style='background-color:#999'>
+	<section id="three" class="wrapper style2 special" style='background-color:#999'>
 
 		<header>
 			<h3> Barang-barang yang dibeli </h3>

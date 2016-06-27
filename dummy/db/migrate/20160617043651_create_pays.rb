@@ -11,5 +11,6 @@ class CreatePays < ActiveRecord::Migration
     end
 
     add_index :pays, [:order_id], :unique => true
+    add_foreign_key :orders, :order_id, on_delete: :cascade
   end
 end
