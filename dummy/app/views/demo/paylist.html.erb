@@ -16,23 +16,26 @@
 	@pay = Pay.all
 	@pay.each do |a|
 		@ord = Order.where( order_id: a.order_id ).first
-		@payment_status = "Sudah Membayar"
-		if a.transaction_status == 'pending'
-			@payment_status = "Belum Membayar"
-		elsif a.transaction_status == 'expire'
-			@payment_status = 'Transaksi Gagal'	
-		end		
+
+		if @ord != nil 
+			@payment_status = "Sudah Membayar"
+			if a.transaction_status == 'pending'
+				@payment_status = "Belum Membayar"
+			elsif a.transaction_status == 'expire'
+				@payment_status = 'Transaksi Gagal'	
+			end
 %>
-		<tr>
-			<td><%= a.order_id %></td>
-			<td><%= a.payment_type %></td>
-			<td><%= @ord.item1 %></td>
-			<td><%= @ord.item2 %></td>
-			<td><%= a.transaction_status %></td>
-			<td><%= a.fraud_status %></td>
-			<td><%= a.gross_amount %></td>
-			<td><%= @payment_status %></td>
-			<td><%= @ord.vtweblink %></td>
-		</tr>
+			<tr>
+				<td><%= a.order_id %></td>
+				<td><%= a.payment_type %></td>
+				<td><%= @ord.item1 %></td>
+				<td><%= @ord.item2 %></td>
+				<td><%= a.transaction_status %></td>
+				<td><%= a.fraud_status %></td>
+				<td><%= a.gross_amount %></td>
+				<td><%= @payment_status %></td>
+				<td><%= @ord.vtweblink %></td>
+			</tr>
+		<%end%>	
 	<%end%>
 </table>

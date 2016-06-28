@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.string :order_id
+      t.string :order_id, :null => false, :unique => true
       t.string :item1
       t.string :item2
       t.string :vtweblink

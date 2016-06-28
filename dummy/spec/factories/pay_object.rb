@@ -2,7 +2,7 @@ require 'rails_helper'
 
 FactoryGirl.define do
 	factory :pay do
-		order_id 			Faker::Number.number(10).to_s
+		order_id 			Faker::Number.number(10)
 		payment_type		"credit_card"
 		transaction_status  "capture"
 		fraud_status 		"ACCEPT"

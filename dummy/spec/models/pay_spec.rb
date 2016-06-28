@@ -30,11 +30,21 @@ RSpec.describe Pay, type: :model do
 
 	it "cannot be stored when there are no order_id" do
 		@pay_variables = FactoryGirl.build(:pay)
-		@pay = Pay.create( 	order_id: nil,
-		 				 	payment_type: @pay_variables.payment_type,
-		 				 	transaction_status: @pay_variables.transaction_status,
-		 				 	fraud_status: @pay_variables.fraud_status,
-		 				 	gross_amount: @pay_variables.gross_amount )
-		@pay.save
+		expect{ Pay.create(order_id: nil,
+		 				payment_type: @pay_variables.payment_type,
+		 				transaction_status: @pay_variables.transaction_status,
+		 				fraud_status: @pay_variables.fraud_status,
+		 				gross_amount: @pay_variables.gross_amount ) }.to raise_error
+	end
+
+	it "should have an order object as references" do
+		# @pay_variables = FactoryGirl.build(:pay)
+		# @pay = Pay.create(
+		# 		order_id: @pay_variables.order_id,
+		#  		payment_type: @pay_variables.payment_type,
+		#  		transaction_status: @pay_variables.transaction_status,
+		#  		fraud_status: @pay_variables.fraud_status,
+		#  		gross_amount: @pay_variables.gross_amount )
+		# expect{@pay.save}.to raise_error
 	end
 end

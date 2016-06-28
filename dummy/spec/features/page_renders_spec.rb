@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'page renders' do
 
 	before :all do
+		FactoryGirl.create(:order)
+		FactoryGirl.create(:pay)
 		@time = Time.now.to_i
 	end
 
@@ -16,6 +18,7 @@ describe 'page renders' do
 		save_and_open_page # saves current snapshot of page
 		print page.html
 		save_screenshot("#{Rails.root}/spec/screenshot/#{@time}/home.png") # save screenshot
+		Percy::Capybara.snapshot(page, name: '#{@time}_home_page')
 	end
 
 	it "should render store page" do
@@ -25,7 +28,7 @@ describe 'page renders' do
 		save_screenshot("#{Rails.root}/spec/screenshot/#{@time}/store.png") # save screenshot
 	end
 
-	it "should render paylist page" do 
+	it "should render paylist page" do
 		visit 'demo/paylist'
 		save_and_open_page # saves current snapshot of page
 		print page.html

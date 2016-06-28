@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160617043651) do
 
   create_table "orders", force: :cascade do |t|
-    t.string   "order_id"
+    t.string   "order_id",   null: false
     t.string   "item1"
     t.string   "item2"
     t.string   "vtweblink"
@@ -25,15 +25,17 @@ ActiveRecord::Schema.define(version: 20160617043651) do
   add_index "orders", ["order_id"], name: "index_orders_on_order_id", unique: true
 
   create_table "pays", force: :cascade do |t|
-    t.string   "order_id"
+    t.string   "order_id",           null: false
     t.string   "payment_type"
     t.string   "transaction_status"
     t.string   "fraud_status"
     t.integer  "gross_amount"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "orders_id"
   end
 
   add_index "pays", ["order_id"], name: "index_pays_on_order_id", unique: true
+  add_index "pays", ["orders_id"], name: "index_pays_on_orders_id"
 
 end

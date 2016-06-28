@@ -27,13 +27,12 @@ RSpec.describe Order, type: :model do
 		expect(@order.vtweblink).to eq @order_variables.vtweblink
 	end
 
-	it "cannot be stored when there are no order id" do 
+	it "cannot be stored when there are no order id" do
 		@order_variables = FactoryGirl.build(:order)
-		@order = Order.create(
-					order_id: nil, 
-					item1: @order_variables.item1,
-					item2: @order_variables.item2,
-					vtweblink: @order_variables.vtweblink )
-		@order.save
+		expect{ Order.create(
+				order_id: nil, 
+				item1: @order_variables.item1,
+				item2: @order_variables.item2,
+				vtweblink: @order_variables.vtweblink ) }.to raise_error
 	end
 end
