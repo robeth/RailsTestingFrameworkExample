@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 FactoryGirl.define do
 	factory :pay do
