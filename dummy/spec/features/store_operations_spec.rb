@@ -1,5 +1,5 @@
 require 'selenium-webdriver'
-require 'rails_helper'
+require 'spec_helper'
 
 describe 'store operations', :type => :feature do
 
