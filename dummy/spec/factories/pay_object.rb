@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../rails_helper'
 
 FactoryGirl.define do
 	factory :pay do
