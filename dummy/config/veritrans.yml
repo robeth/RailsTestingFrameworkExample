@@ -5,6 +5,13 @@ development:
   server_key: "VT-server-xT8Rq8WoFMVix-UgTXnXfdis"
   api_host: https://api.sandbox.veritrans.co.id
 
+test:
+  # Register in sandbox veritrans and get your keys here:
+  # https://my.sandbox.veritrans.co.id/settings/config_info
+  client_key: "VT-client-Npz3IqA-ObYNvoGp"
+  server_key: "VT-server-xT8Rq8WoFMVix-UgTXnXfdis"
+  api_host: https://api.sandbox.veritrans.co.id
+
 production:
   # Register and get your keys here:
   # https://my.veritrans.co.id/settings/config_info
