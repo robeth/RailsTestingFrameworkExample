@@ -26,6 +26,7 @@ describe 'page renders' do
 		save_and_open_page # saves current snapshot of page
 		print page.html
 		save_screenshot("#{Rails.root}/spec/screenshot/#{@time}/store.png") # save screenshot
+		Percy::Capybara.snapshot(page, name: '#{@time}_store_page')
 	end
 
 	it "should render paylist page" do
@@ -33,6 +34,7 @@ describe 'page renders' do
 		save_and_open_page # saves current snapshot of page
 		print page.html
 		save_screenshot("#{Rails.root}/spec/screenshot/#{@time}/paylist.png") # save screenshot
+		Percy::Capybara.snapshot(page, name: '#{@time}_paylist_page')
 	end
 
 	it "should render Veritrans Payment Web" do 
