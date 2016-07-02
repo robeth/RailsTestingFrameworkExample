@@ -62,6 +62,7 @@ group :development, :test do
   gem 'capybara-screenshot'
   gem 'poltergeist'
   gem 'percy-capybara'
+  gem 'eyes_selenium'
 end
 
 group :development do
