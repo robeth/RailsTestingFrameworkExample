@@ -1,4 +1,5 @@
 require_relative '../rails_helper'
+require_relative '../supports/capturer'
 require 'capybara/rspec'
 require 'eyes_selenium'
 
@@ -9,7 +10,7 @@ describe 'page renders' do
     end
 
 	before :all do
-		@base_url = "http://43de3a89.ngrok.io"
+		@base_url = "http://e4af5e71.ngrok.io"
 
 		caps = {
   				:platform => "Windows 8",
@@ -50,6 +51,12 @@ describe 'page renders' do
   #               visit 'demo/paylist'
   #               eyes.check_window('paylist_page')
   #       end
+
+  		@capturer = Capturer::Driver.new
+  		@capturer.capture('demo/index', "home_page")
+  		@capturer.capture('demo/store', "store_page")
+  		@capturer.capture('demo/paylist', "paylist_page")
+  		@capturer.close
 	end
 
 	it "should render Applitools with SauceLabs in Browser" do 
