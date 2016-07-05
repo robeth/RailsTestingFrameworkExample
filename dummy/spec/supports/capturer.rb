@@ -1,27 +1,3 @@
-# caps = {
-#   		:platform => "Windows 8",
-#   		:browserName => "Chrome",
-#   		:version => "31", 
-#   		:screen_resolution => "1280x1024"
-# }
-
-# @driver = Selenium::WebDriver.for(:remote,
-#    		 	:url => "http://luthfiswees:c38b7a3d-81b2-4158-a9b1-dbcb0ce1208b@ondemand.saucelabs.com:80/wd/hub",
-#     		:desired_capabilities => caps)
-# @browser = @eyes.open(app_name: 'DummyStore', test_name: 'Dummy Page in Chrome',
-#             viewport_size: {width: 1024, height: 768}, driver: @driver)
-
-# Capybara.register_driver :selenium do |app|
-#   Capybara::Selenium::Driver.new(app, :browser => :firefox)
-# end
-
-# Capybara.register_driver :remote_driver do |app|
-# 	Capybara::Selenium::Driver.new(app, :browser => @browser)
-# end	
-
-# Capybara.javascript_driver = :webkit
-# Capybara.current_driver = :remote_driver
-
 require_relative '../rails_helper'
 require 'capybara/rspec'
 require 'eyes_selenium'
@@ -51,76 +27,90 @@ module Capturer
 		@default_sauce_username = "luthfiswees"
 
 		@default_screenshot_path = "#{Rails.root}/spec/screenshot"
-
-		@default_test_name = "#{@default_app_name} in #{@default_browser_name} by Capturer"
 	end
 	
 
 	class Driver
-		attr_accessor :current_browser, :base_url, :capability, :current_screenshot_path
+		attr_accessor :current_browser, :current_base_url, :current_capability, :current_screenshot_path
 
 		include Capturer
 
 		def initialize
 			super()
 			init_variable
-			reinit
 			start_driver
 		end
 
-		def init_variable 
-			@default_capability =  {
+		def init_variable
+			@current_base_url = @default_base_url
+			@current_screenshot_path = @default_screenshot_path
+
+			@current_capability =  {
 		  		:platform => @default_platform,
 		  		:browserName => @default_browser_name,
 		  		:version => @default_browser_version, 
 		  		:screen_resolution => @default_screen_resolution
 			}
 
-			@default_eyes = Applitools::Eyes.new
-			@default_eyes.api_key = @default_eyes_access_key
+			@current_browser_name = @default_browser_name
+			@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
 
-			@default_driver = Selenium::WebDriver.for(:remote,
+			@current_eyes = Applitools::Eyes.new
+			@current_eyes.api_key = @default_eyes_access_key
+
+			@current_driver = Selenium::WebDriver.for(:remote,
    		 	url: "http://#{@default_sauce_username}:#{@default_sauce_access_key}@ondemand.saucelabs.com:80/wd/hub",
-    		desired_capabilities: @default_capability)
+    		desired_capabilities: @current_capability)
 
-			@default_browser = @default_eyes.open(app_name: @default_app_name, test_name: @default_test_name,
-            viewport_size: {width: 1024, height: 768}, driver: @default_driver)
+			@current_browser = @current_eyes.open(app_name: @default_app_name, test_name: @current_test_name,
+            viewport_size: {width: 1024, height: 768}, driver: @current_driver)
 		end
-
-		def reinit
-			if @current_browser == nil
-				@current_browser = @default_browser
-			end
-		end
-
-		def reset
-			@current_browser			= @default_browser
-			@base_url 					= @default_base_url
-			@capability     			= @default_capability
-			@current_screenshot_path	= @default_screenshot_path
-		end	
 
 		def start_driver
 			Capybara.register_driver :remote_driver do |app|
-				Capybara::Selenium::Driver.new(app, :browser => @default_browser)
+				Capybara::Selenium::Driver.new(app, :browser => @current_browser)
 			end
 			Capybara.javascript_driver = :webkit
 			Capybara.current_driver = :remote_driver
-
 		end
 
 		def capture(path, fileName)
-			@current_browser.get "#{@default_base_url}/#{path}" 
-			@default_eyes.check_window("#{@default_screenshot_path}/#{fileName}")  
+			@current_browser.get "#{@current_base_url}/#{path}" 
+			@current_eyes.check_window("#{@current_screenshot_path}/#{fileName}")  
 		end
 
-		def get_eyes
-			return @default_eyes
+		def configuring_driver_name
+			if @current_capability[:browserName] == nil || @current_capability[:browserName] == ''
+				@current_browser_name = @current_capability[:deviceName]
+			else	
+				@current_browser_name = @current_capability[:browserName]
+			end
+
+			@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
+		end
+
+		def set_capability(caps)
+			@current_capability = caps
+			reconfiguring_capability
+			start_driver
+		end
+
+		def reconfiguring_capability
+			configuring_driver_name
+
+			@current_eyes = Applitools::Eyes.new
+			@current_eyes.api_key = @default_eyes_access_key
+
+			@current_driver = Selenium::WebDriver.for(:remote,
+   		 	url: "http://#{@default_sauce_username}:#{@default_sauce_access_key}@ondemand.saucelabs.com:80/wd/hub",
+    		desired_capabilities: @current_capability)
+
+			@current_browser = @current_eyes.open(app_name: @default_app_name, test_name: @current_test_name,
+            viewport_size: {width: 1024, height: 768}, driver: @current_driver)
 		end
 
 		def close 
-			@default_eyes.close
-			@default_driver.quit
+			@current_eyes.close
 			@current_browser.quit
 		end	
 	end	  
