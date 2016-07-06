@@ -1,4 +1,3 @@
-require_relative '../rails_helper'
 require 'capybara/rspec'
 require 'eyes_selenium'
 
@@ -8,9 +7,9 @@ module Capturer
 		:default_base_url, :default_screenshot_path, :default_sauce_username
 
 	def initialize
-		@default_sauce_access_key = "c38b7a3d-81b2-4158-a9b1-dbcb0ce1208b"
+		@default_sauce_access_key = "#{ENV["SAUCE_KEY"]}"
 
-		@default_eyes_access_key = "3no5g96gEuGXfnJd4qisQUyaRn24bEXNIBAKcqCngHM110"
+		@default_eyes_access_key  = "#{ENV["EYES_KEY"]}"
 
 		@default_platform = "Windows 8"
 
@@ -45,15 +44,16 @@ module Capturer
 			@current_base_url = @default_base_url
 			@current_screenshot_path = @default_screenshot_path
 
+			@current_browser_name = @default_browser_name
+			@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
+
 			@current_capability =  {
 		  		:platform => @default_platform,
 		  		:browserName => @default_browser_name,
 		  		:version => @default_browser_version, 
-		  		:screen_resolution => @default_screen_resolution
+		  		:screen_resolution => @default_screen_resolution,
+		  		:name => @current_test_name
 			}
-
-			@current_browser_name = @default_browser_name
-			@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
 
 			@current_eyes = Applitools::Eyes.new
 			@current_eyes.api_key = @default_eyes_access_key
@@ -74,6 +74,14 @@ module Capturer
 			Capybara.current_driver = :remote_driver
 		end
 
+		def set_base_url(base_url)
+			@current_base_url = base_url
+		end
+
+		def set_screenshot_path(screenshot_path)
+			@current_screenshot_path = screenshot_path
+		end
+
 		def capture(path, fileName)
 			@current_browser.get "#{@current_base_url}/#{path}" 
 			@current_eyes.check_window("#{@current_screenshot_path}/#{fileName}")  
@@ -87,6 +95,7 @@ module Capturer
 			end
 
 			@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
+			@current_capability[:name] = @current_test_name
 		end
 
 		def set_capability(caps)

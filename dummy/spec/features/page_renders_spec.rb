@@ -45,6 +45,16 @@ describe 'page renders' do
   		@capturer.close
 	end
 
+	it "should render Applitools with SauceLabs in Browser from Local" do
+		@capturer = Capturer::Driver.new
+		@capturer.set_base_url "localhost:3000"
+		@capturer.set_capability(@caps)
+		@capturer.capture('demo/index', "home_page")
+  		@capturer.capture('demo/store', "store_page")
+  		@capturer.capture('demo/paylist', "paylist_page")
+  		@capturer.close
+	end
+
 	it "should render Applitools with SauceLabs in Mobile" do
 		# Sadly, Applitools did not support this features
 
