@@ -1,4 +1,5 @@
 require_relative '../rails_helper'
+require 'capybara/rspec'
 
 describe "header navigations" do
 

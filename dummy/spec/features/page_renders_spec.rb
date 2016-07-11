@@ -47,7 +47,7 @@ describe 'page renders' do
 
 	it "should render Applitools with SauceLabs in Browser from Local" do
 		@capturer = Capturer::Driver.new
-		@capturer.set_base_url "localhost:3000"
+		@capturer.set_base_url_to_local_rails
 		@capturer.set_capability(@caps)
 		@capturer.capture('demo/index', "home_page")
   		@capturer.capture('demo/store', "store_page")

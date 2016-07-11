@@ -21,7 +21,7 @@ module Capturer
 
 		@default_app_name = "DummyStore"
 
-		@default_base_url = "http://e4af5e71.ngrok.io"
+		@default_base_url = "http://b2561566.ngrok.io"
 
 		@default_sauce_username = "luthfiswees"
 
@@ -76,6 +76,10 @@ module Capturer
 
 		def set_base_url(base_url)
 			@current_base_url = base_url
+		end
+
+		def set_base_url_to_local_rails 
+			@current_base_url = "localhost:3000"
 		end
 
 		def set_screenshot_path(screenshot_path)
