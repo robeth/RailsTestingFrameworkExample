@@ -45,7 +45,7 @@ when "saucelabs"
   		:version => "31",
   		:screen_resolution => "1280x1024",
 
-  		:name => "TestTest"
+  		:name => IntegrationDiff.name_test( ENV['IDIFF_DRIVER'] )
 	}
 
 	# setting up the browser over here

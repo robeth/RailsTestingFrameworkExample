@@ -40,7 +40,7 @@ IntegrationDiff.configure do |config|
     config.api_key = ENV["IDIFF_API_KEY"]
 
     # configure js driver which is used for taking screenshots.
-    config.javascript_driver = "selenium"
+    config.javascript_driver = "poltergeist"
 
     # configure service to mock capturing and uploading screenshots
     config.enable_service = !!ENV["IDIFF_ENABLE"]
