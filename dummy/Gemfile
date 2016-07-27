@@ -63,7 +63,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'percy-capybara'
   gem 'eyes_selenium'
-  gem 'integration-diff', :git => "https://github.com/luthfiswees/integration-diff.rb.git"
+  gem 'integration-diff', :git => "https://github.com/luthfiswees/integration-diff.rb.git", branch: "master"
 end
 
 group :development do

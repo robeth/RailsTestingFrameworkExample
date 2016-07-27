@@ -1,8 +1,3 @@
-require_relative '../rails_helper'
-require_relative '../supports/capturer'
-require 'capybara/rspec'
-require 'eyes_selenium'
-
 describe 'page renders' do
 
 	before :all do
@@ -48,7 +43,6 @@ describe 'page renders' do
 		@current_browser_name = @default_browser_name
 		@current_test_name = "#{@default_app_name} in #{@current_browser_name} by Capturer"
 
-		@current_batch = Applitools::Base::BatchInfo.new("test_name")
 
 		FactoryGirl.create(:order)
 		FactoryGirl.create(:pay)
@@ -99,7 +93,6 @@ describe 'page renders' do
 
 		# @current_browser.get "#{@current_base_url}/demo/index"  
 		# @current_eyes.check_window("#{@current_screenshot_path}/index")
-		byebug
 		visit 'demo/index'
 		idiff.screenshot "home_page"
 		# visit 'demo/store'

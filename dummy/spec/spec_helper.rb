@@ -40,7 +40,7 @@ IntegrationDiff.configure do |config|
     config.api_key = ENV["IDIFF_API_KEY"]
 
     # configure js driver which is used for taking screenshots.
-    config.javascript_driver = "poltergeist"
+    config.javascript_driver = "selenium"
 
     # configure service to mock capturing and uploading screenshots
     config.enable_service = !!ENV["IDIFF_ENABLE"]
@@ -54,16 +54,11 @@ RSpec.configure do |config|
   config.include IntegrationDiff::Dsl
 
   config.before(:suite) do
-    Percy.config.access_token = Rails.application.secrets.percy_access_token
-    Percy::Capybara.initialize_build
-    # byebug
-    IntegrationDiff.rerun ENV['IDIFF_RUN_ID'].to_i
+    IntegrationDiff.start_run
   end
 
   config.after(:suite) do 
-    Percy::Capybara.finalize_build
-    # byebug
-    IntegrationDiff.upload_run 
+    IntegrationDiff.wrap_run 
   end
 
   # rspec-expectations config goes here. You can use an alternate

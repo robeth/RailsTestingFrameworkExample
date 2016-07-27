@@ -8,7 +8,6 @@
 # native browser, Second method by using idiff service to set the drivers,
 # and the other by using third party drivers (using SauceLabs).
 # I will display those three writing formats over this documents
-
 case ENV['IDIFF_DRIVER']
 
 ###################################################################################
@@ -36,7 +35,7 @@ when "saucelabs"
 
 	# URL for SauceLabs drivers
 	saucelabs_enable = true
-	sauce_url = "http://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_KEY']}@ondemand.saucelabs.com:80/wd/hub"
+	sauce_url = "http://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_KEY']}@localhost:4445/wd/hub"
 
 	# register your driver capabilities here
 	# Remember, only SauceLabs capability formats that are accepted
@@ -46,14 +45,8 @@ when "saucelabs"
   		:version => "31",
   		:screen_resolution => "1280x1024",
 
-  		:name => IntegrationDiff.name_test( ENV['IDIFF_DRIVER'] )
+  		:name => "TestTest"
 	}
-
-	# setting up the driver over here
-	# This settings will invoke the test environment over the remote
-	@driver = Selenium::WebDriver.for(:remote,
-	   		 	:url => sauce_url,
-	    		:desired_capabilities => capabilities)
 
 	# setting up the browser over here
 	@browser = {
@@ -90,12 +83,6 @@ when "saucelabs_mobile"
 	mobile_capabilities['deviceOrientation'] = 'portrait'
 	mobile_capabilities[:name] = IntegrationDiff.name_test ENV['IDIFF_DRIVER']
 
-	# setting up the driver over here
-	# This settings will invoke the test environment over the remote
-	@mobile_driver = Selenium::WebDriver.for(:remote,
-	   		 	:url => sauce_url,
-	    		:desired_capabilities => mobile_capabilities)
-
 	# setting up the browser over here
 	@mobile_browser = {
 		browser: :remote,
@@ -118,14 +105,6 @@ end
 
 # register the selected drivers as current driver used
 Capybara.current_driver = :used_driver
-
-# if you are using SauceLabs drivers. Please use the code below
-# this code purpose is to connect Capybara with the remote test
-if saucelabs_enable then
-	Capybara.app_host = "#{sauce_url}/test/#{Capybara.current_session.driver.browser.session_id}"
-end
-
-
 
 	# ################################
 	# # capabilities for remote driver

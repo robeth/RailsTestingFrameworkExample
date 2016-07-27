@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/luthfiswees/integration-diff.rb.git
-  revision: 569a976c104977c13afb13a1d6b44f94e0932b7a
+  revision: 5da7ab46a5f3122bdae69da16094c5bfc32bfecc
+  branch: master
   specs:
     integration-diff (0.2.0)
       faraday
