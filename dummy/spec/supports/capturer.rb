@@ -19,13 +19,17 @@ module Capturer
 
 		@default_browser_version = "28"
 
-		@default_app_name = "DummyStore"
+		@default_app_name = "Dummy"
 
 		@default_base_url = "http://b2561566.ngrok.io"
 
 		@default_sauce_username = "luthfiswees"
 
 		@default_screenshot_path = "#{Rails.root}/spec/screenshot"
+
+		@default_batch_name = "DummyProject"
+
+		@closed = false
 	end
 	
 
@@ -74,12 +78,27 @@ module Capturer
 			Capybara.current_driver = :remote_driver
 		end
 
+		def set_app_name(project_name) 
+			@default_app_name = project_name
+		end
+
+		def set_batch
+			@current_batch_name = "#{@default_app_name} in #{@current_capability[:browserName]}-#{@current_capability[:version]}"
+			@current_batch = Applitools::Base::BatchInfo.new(@current_batch_name)
+			reconfiguring_capability
+			start_driver
+		end
+
 		def set_base_url(base_url)
 			@current_base_url = base_url
+			reconfiguring_capability
+			start_driver
 		end
 
 		def set_base_url_to_local_rails 
 			@current_base_url = "localhost:3000"
+			reconfiguring_capability
+			start_driver
 		end
 
 		def set_screenshot_path(screenshot_path)
@@ -87,8 +106,27 @@ module Capturer
 		end
 
 		def capture(path, fileName)
+			if @closed then
+				reconfiguring_capability
+				start_driver
+
+				@closed = false
+			end
+
 			@current_browser.get "#{@current_base_url}/#{path}" 
 			@current_eyes.check_window("#{@current_screenshot_path}/#{fileName}")  
+		end
+
+		def capture_url(url, fileName)
+			if @closed then
+				reconfiguring_capability
+				start_driver
+
+				@closed = false
+			end
+
+			@current_browser.get "#{url}" 
+			@current_eyes.check_window("#{@current_screenshot_path}/#{fileName}")
 		end
 
 		def configuring_driver_name
@@ -106,13 +144,15 @@ module Capturer
 			@current_capability = caps
 			reconfiguring_capability
 			start_driver
+			set_batch
 		end
 
 		def reconfiguring_capability
 			configuring_driver_name
-
+			
 			@current_eyes = Applitools::Eyes.new
 			@current_eyes.api_key = @default_eyes_access_key
+			@current_eyes.batch = @current_batch
 
 			@current_driver = Selenium::WebDriver.for(:remote,
    		 	url: "http://#{@default_sauce_username}:#{@default_sauce_access_key}@ondemand.saucelabs.com:80/wd/hub",
@@ -122,9 +162,15 @@ module Capturer
             viewport_size: {width: 1024, height: 768}, driver: @current_driver)
 		end
 
+		def not_closed?
+			return !@closed
+		end
+
 		def close 
 			@current_eyes.close
 			@current_browser.quit
+
+			@closed = true
 		end	
 	end	  
 end
